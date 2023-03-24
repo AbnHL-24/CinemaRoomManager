@@ -1,13 +1,15 @@
 package cinema
 
 fun main() {
-    println("Cinema:")
-    println("  1 2 3 4 5 6 7 8")
-    println("1 S S S S S S S S")
-    println("2 S S S S S S S S")
-    println("3 S S S S S S S S")
-    println("4 S S S S S S S S")
-    println("5 S S S S S S S S")
-    println("6 S S S S S S S S")
-    println("7 S S S S S S S S")
+    println("Enter the number of rows:")
+    val filas = readln().toInt()
+    println("Enter the number of seats in each row:")
+    val columnas = readln().toInt()
+    val ganancia =  if ((filas * columnas) <= 60) {
+            filas * columnas * 10
+        } else {
+            (filas/2) * columnas * 10 + (filas - (filas/2)) * columnas * 8
+        }
+    println("Total income:")
+    println("$${ganancia}")
 }
