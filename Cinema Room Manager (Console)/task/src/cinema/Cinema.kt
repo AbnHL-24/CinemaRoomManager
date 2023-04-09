@@ -5,11 +5,41 @@ fun main() {
     val filas = readln().toInt()
     println("Enter the number of seats in each row:")
     val columnas = readln().toInt()
-    val ganancia =  if ((filas * columnas) <= 60) {
-            filas * columnas * 10
+    val asientos = MutableList(filas) {MutableList(columnas) {"S"} }
+    imprimirTablero(asientos)
+
+    println("Enter a row number:")
+    val asientoFila = readln().toInt()
+    println("Enter a seat number in that row:")
+    val asientoColumna = readln().toInt()
+
+    val precioAsiento = if (filas * columnas <= 60) {
+        10
+    } else {
+        if (asientoFila <= filas/2) {
+            10
         } else {
-            (filas/2) * columnas * 10 + (filas - (filas/2)) * columnas * 8
+            8
         }
-    println("Total income:")
-    println("$${ganancia}")
+    }
+    println("Ticket price: $${precioAsiento}")
+    asientos[asientoFila - 1][asientoColumna - 1] = "B"
+    imprimirTablero(asientos)
+}
+
+private fun imprimirTablero(asientos: MutableList<MutableList<String>>) {
+    println("\nCinema:")
+    print(" ")
+    for (i in asientos[0].indices) {
+        print(" ${i + 1}")
+    }
+    println("")
+    for (i in asientos.indices) {
+        print("${i + 1}")
+        for (j in asientos[i].indices) {
+            print(" ${asientos[i][j]}")
+        }
+        println("")
+    }
+    println("\n")
 }
