@@ -1,13 +1,33 @@
 package cinema
 
 fun main() {
+    //Fase donde se establece el tamaño de la sala.
     println("Enter the number of rows:")
     val filas = readln().toInt()
     println("Enter the number of seats in each row:")
     val columnas = readln().toInt()
     val asientos = MutableList(filas) {MutableList(columnas) {"S"} }
-    imprimirTablero(asientos)
 
+    //bucle del programa
+    var continuidad = true
+    while (continuidad) {
+        println("1. Show the seats")
+        println("2. Buy a ticket")
+        println("0. Exit")
+        when (readln().toInt()) {
+            1 -> imprimirTablero(asientos)
+            2 -> comprarBoletos(filas, columnas, asientos)
+            0 -> continuidad = false
+        }
+
+    }
+}
+
+private fun comprarBoletos(
+    filas: Int,
+    columnas: Int,
+    asientos: MutableList<MutableList<String>>
+) {
     println("Enter a row number:")
     val asientoFila = readln().toInt()
     println("Enter a seat number in that row:")
@@ -16,7 +36,7 @@ fun main() {
     val precioAsiento = if (filas * columnas <= 60) {
         10
     } else {
-        if (asientoFila <= filas/2) {
+        if (asientoFila <= filas / 2) {
             10
         } else {
             8
@@ -24,10 +44,11 @@ fun main() {
     }
     println("Ticket price: $${precioAsiento}")
     asientos[asientoFila - 1][asientoColumna - 1] = "B"
-    imprimirTablero(asientos)
 }
 
-private fun imprimirTablero(asientos: MutableList<MutableList<String>>) {
+private fun imprimirTablero(
+    asientos: MutableList<MutableList<String>>
+) {
     println("\nCinema:")
     print(" ")
     for (i in asientos[0].indices) {
